@@ -1,5 +1,5 @@
 from bip_utils import Bip39SeedGenerator, Bip32Slip10Secp256k1
-from bip_utils.utils import CryptoUtils
+from eth_utils import keccak
 
 # 1. 니모닉 또는 시드 준비
 mnemonic = "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about"
@@ -19,5 +19,5 @@ child = bip32_root.DerivePath("m/0/1")
 print("\n--- 자식 키 파생 결과 ---")
 print("📍 경로: m/0/1")
 print("🔐 Child xprv:", child.PrivateKey().Raw().ToHex())
-print("🔓 Child xpub:", child.PublicKey().RawCompressed().ToHex())
-print("📬 Address-like (Keccak hash last 20 bytes):", CryptoUtils.Kekkak256(child.PublicKey().RawUncompressed().ToBytes())[12:].hex())
+eth_address = "0x" + keccak(child.PublicKey().RawUncompressed().ToBytes())[-20:].hex()
+print("📬 Ethereum-like Address:", eth_address)
