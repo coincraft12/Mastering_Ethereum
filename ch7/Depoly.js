@@ -2,7 +2,7 @@ import fs from "fs";
 import Web3 from "web3";
 
 // === RPC & 계정 설정 ===
-const RPC_URL = "https://rpc.holesky.ethpandaops.io";
+const RPC_URL = "https://holesky.gateway.tenderly.co";
 const PRIVATE_KEY = ""; // 테스트용
 
 // === ABI & Bytecode 로드 ===
@@ -20,6 +20,12 @@ web3.eth.defaultAccount = account.address;
 console.log(`배포 계정: ${account.address}`);
 
 try {
+
+  const chainId = await web3.eth.getChainId();
+  const blockNum = await web3.eth.getBlockNumber();
+  console.log(`현재 연결된 체인 ID: ${chainId}`);
+  console.log(`현재 블록 번호: ${blockNum}`);
+
   // === 잔액 출력 ===
   const balance = await web3.eth.getBalance(account.address);
   console.log(`현재 잔액: ${web3.utils.fromWei(balance, "ether")} ETH`);
