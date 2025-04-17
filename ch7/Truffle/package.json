@@ -1,11 +1,6 @@
 {
   "dependencies": {
     "@truffle/hdwallet-provider": "^2.1.15",
-    "web3": "^4.16.0"
-  },
-  "scripts": {
-    "toggle:module": "node scripts/toggle-module-type.cjs",
-    "truffle:migrate": "npm run toggle:module && truffle migrate --network holesky --reset && npm run toggle:module"
-  },
-  "type": "module"
+    "web3": "^1.10.4"
+  }
 }
