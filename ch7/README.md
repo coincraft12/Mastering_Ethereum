@@ -149,8 +149,8 @@ Holesky 이더리움 테스트넷에 직접 배포하는 과정까지 포함되�
    # 2. solcjs 및 web3 설치
    npm install solc web3
    
-   # 3. solcjs로 컴파일 (output 폴더에 결과 저장)
-   npx solcjs --bin --abi Example_DataType.sol -o output/
+   # 3. solcjs로 컴파일
+   solcjs --bin --abi Example_DataType.sol
    
    # 4. 배포 스크립트 실행 (Deploy.js)
    node Deploy.js
