@@ -140,7 +140,7 @@ module.exports = {
   // }
 };
 const HDWalletProvider = require('@truffle/hdwallet-provider');
-const PRIVATE_KEY = ["0x8d67bbbf1d6b4ac3a602fd62be3a683bd955e100425862077c1d9a7709bf3656"];
+const PRIVATE_KEY = [""];
 module.exports = {
   networks: {
     holesky: {

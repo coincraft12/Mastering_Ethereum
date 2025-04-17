@@ -3,7 +3,7 @@ import Web3 from "web3";
 
 // === RPC & 계정 설정 ===
 const RPC_URL = "https://ethereum-holesky.publicnode.com";
-const PRIVATE_KEY = "0x8d67bbbf1d6b4ac3a602fd62be3a683bd955e100425862077c1d9a7709bf3656"; // 테스트용
+const PRIVATE_KEY = ""; // 테스트용
 
 // === ABI & Bytecode 로드 ===
 const abi = JSON.parse(fs.readFileSync("Faucet_sol_Faucet.abi", "utf8"));
