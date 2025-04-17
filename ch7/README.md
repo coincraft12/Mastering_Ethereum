@@ -104,6 +104,10 @@ Holesky 이더리움 테스트넷에 직접 배포하는 과정까지 포함되�
    ```
 
    #### 2. 블록체인 배포
+   - 실행 전 truffle-config.js 코드 내 MetaMask 개인키 입력 (주의)
+   ```js
+   const PRIVATE_KEY = ["YOUR PRIVATE_KEY"];
+   ```
    ```bash
    truffle migrate --network holesky
    ```
@@ -112,6 +116,28 @@ Holesky 이더리움 테스트넷에 직접 배포하는 과정까지 포함되�
    ```bash
    truffle complie --all
    truffle migrate --network holesky --reset
+   ```
+
+ ### ✅ **실행**
+
+   #### 1. 가스 예상 가격 출력
+   - 실행 전 truffle-config.js 코드 내 MetaMask 개인키 입력 (주의)
+   ```js
+   const PRIVATE_KEY = ["YOUR PRIVATE_KEY"];
+   ```
+   ```bash
+   cd scripts/
+   truffle console --network holesky
+   ```
+   - truffle 콘솔 창에 진입 시:
+   ```bash
+   truffle(holesky)> exec gas_estimate.js
+   ```
+
+   #### 2. 트랜잭션 이벤트 출력
+   ```bash
+   cd scripts
+   node listen.js
    ```
  
  ### 🧰 **solc-js + nodejs 수동 배포 예제**
