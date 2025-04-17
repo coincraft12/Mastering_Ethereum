@@ -130,14 +130,39 @@ Holesky 이더리움 테스트넷에 직접 배포하는 과정까지 포함되�
    truffle console --network holesky
    ```
    - truffle 콘솔 창에 진입 시:
-   ```bash
-   truffle(holesky)> exec gas_estimate.js
+   ```js
+   exec gas_estimate.js
    ```
 
    #### 2. 트랜잭션 이벤트 출력
    ```bash
    cd scripts
    node listen.js
+   ```
+
+   #### 3. 다른 컨트랙트 호출
+   ```bash
+   cd scripts/
+   truffle console --network holesky
+   ```
+   - truffle 콘솔 창에 진입 시:
+   ```js
+   const Caller = await artifacts.require("Caller");
+   const CalledContract = await.artifacts.require("CalledContract);
+
+   const caller = await Caller.deployed();
+   const called = await CalledContract.deployed();
+
+   const receipt = await caller.makeCalls(called.address);
+   ```
+   - 이벤트 로그 실제 값 출력
+   ```js
+   receipt.logs.forEach(log => {
+   console.log("Event from:", log.address);
+   console.log("  sender:", log.args.sender);
+   console.log("  origin:", log.args.origin);
+   console.log("  this:", log.args.current);
+   });
    ```
  
  ### 🧰 **solc-js + nodejs 수동 배포 예제**
