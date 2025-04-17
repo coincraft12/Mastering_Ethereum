@@ -6,5 +6,6 @@
   "scripts": {
     "toggle:module": "node scripts/toggle-module-type.cjs",
     "truffle:migrate": "npm run toggle:module && truffle migrate --network holesky --reset && npm run toggle:module"
-  }
+  },
+  "type": "module"
 }

@@ -8,7 +8,7 @@ module.exports = async function(callback) {
     const faucet = await Faucet.deployed();
 
     // Step 1: Faucet 컨트랙트에 이더 충전
-    console.log("🪙 Faucet에 1 ETH 보내는 중...");
+    console.log("🪙 Faucet에 0.1 ETH 보내는 중...");
     await web3.eth.sendTransaction({
       from: sender,
       to: faucet.address,
