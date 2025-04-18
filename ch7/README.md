@@ -93,8 +93,8 @@ Holesky 이더리움 테스트넷에 직접 배포하는 과정까지 포함되�
   ```bash
   npm install
   ```
-  - package.json 파일이 있는 디렉토리(\ch7\)에서 실행해야 정상 작동됨
-  - 설치 완료 후 루트 디렉토리에 node_modules/ 디렉토리 생성됨
+  - package.json 파일이 있는 디렉토리(\ch7\Truffle\)에서 실행해야 정상 작동됨
+  - 설치 완료 후 Truffle 디렉토리에 node_modules/ 디렉토리 생성됨
 
  ### ✅ **컴파일 및 배포**
    
@@ -148,21 +148,19 @@ Holesky 이더리움 테스트넷에 직접 배포하는 과정까지 포함되�
    - truffle 콘솔 창에 진입 시:
    ```js
    const Caller = await artifacts.require("Caller");
-   const CalledContract = await.artifacts.require("CalledContract);
-
+   const CalledContract = await artifacts.require("CalledContract");
    const caller = await Caller.deployed();
    const called = await CalledContract.deployed();
-
    const receipt = await caller.makeCalls(called.address);
    ```
    - 이벤트 로그 실제 값 출력
    ```js
-   receipt.logs.forEach(log => {
-   console.log("Event from:", log.address);
-   console.log("  sender:", log.args.sender);
-   console.log("  origin:", log.args.origin);
-   console.log("  this:", log.args.current);
-   });
+   receipt.logs.forEach(log => {   
+    console.log("Event from:", log.address);   
+    console.log("  sender:", log.args.sender);   
+    console.log("  origin:", log.args.origin);   
+    console.log("  this:", log.args.current);   
+    });
    ```
  
  ### 🧰 **solc-js + nodejs 수동 배포 예제**
