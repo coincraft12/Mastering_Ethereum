@@ -1,5 +1,5 @@
 
-# 📘 Chapter 8 – Vyper 환경 구성 및 CLI 스마트 컨트랙트 실습 (Mastering Ethereum)
+# 📘 Chapter 8 – 스마트 컨트랙트와 바이퍼 (Mastering Ethereum)
 
 이 저장소는 『Mastering Ethereum』 8장을 기반으로 진행한 Vyper 스마트 컨트랙트 실습 환경 구성 및 CLI 기반 배포 흐름을 문서화한 것입니다.
 
@@ -32,17 +32,17 @@ cd vyper-project
 # 가상환경 생성
 python -m venv vyper-env
 
-# PowerShell 기준 활성화 (실행 정책 설정 필요 시 아래 참고)
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
-.yper-env\Scripts\Activate.ps1
+# 가상환경 활성화
+vyper-env\Scripts\ctivate.bat
 ```
 
-> CMD 사용하는 경우:
-> ```cmd
-> vyper-env\Scriptsctivate.bat
-> ```
+### 3. 필요 패키지 설치
+```bash
+npm init -y
+npm install web3 dotenv
+```
 
-### 3. Vyper 설치 (0.3.10)
+### 4. Vyper 설치 (0.3.10)
 
 ```bash
 pip install vyper==0.3.10
@@ -55,86 +55,32 @@ vyper --version  # 출력: 0.3.10
 
 ---
 
-## 📄 Vyper 컨트랙트 예시 (faucet.vy)
-
-```python
-# @version ^0.3.10
-
-event Deposit:
-    sender: indexed(address)
-    amount: uint256
-
-event Withdrawal:
-    receiver: indexed(address)
-    amount: uint256
-
-event LimitChanged:
-    new_limit: uint256
-
-owner: public(address)
-withdraw_limit: public(uint256)
-balances: public(HashMap[address, uint256])
-
-@internal
-def _log_withdraw(_to: address, _amount: uint256):
-    log Withdrawal(_to, _amount)
-
-@external
-def __init__():
-    self.owner = msg.sender
-    self.withdraw_limit = as_wei_value(0.1, "ether")
-
-@payable
-@external
-def deposit():
-    assert msg.value > 0, "Must send ETH"
-    self.balances[msg.sender] += msg.value
-    log Deposit(msg.sender, msg.value)
-
-@external
-def withdraw(_amount: uint256):
-    assert _amount <= self.withdraw_limit, "Exceeds withdraw limit"
-    assert self.balances[msg.sender] >= _amount, "Insufficient balance"
-    self.balances[msg.sender] -= _amount
-    send(msg.sender, _amount)
-    self._log_withdraw(msg.sender, _amount)
-
-@external
-def set_withdraw_limit(_new_limit: uint256):
-    assert msg.sender == self.owner, "Only owner"
-    self.withdraw_limit = _new_limit
-    log LimitChanged(_new_limit)
-
-@view
-@external
-def get_my_balance() -> uint256:
-    return self.balances[msg.sender]
-```
-
----
-
-## 🛠 컴파일 명령어
-
-```bash
-vyper -f abi faucet.vy > faucet.abi
-vyper -f bytecode faucet.vy > faucet.bin
-```
-
----
-
-## 🔧 인코딩 오류 대처 (PowerShell)
-
-```powershell
-$env:PYTHONIOENCODING="utf-8"
-```
-
----
-
 ## ✅ 컴파일 에러 방지 체크리스트
 
 - `# @version` 지시문은 파일 첫 줄
 - 이벤트(event)는 `@version` 바로 아래
 - 상태 변수는 이벤트 아래 위치
+- `package.json` 파일 내   `"type": "module",` 구문 추가
+```json
+{
+  "type": "module",
+  "name": "ch8",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "web3": "^4.16.0"
+  }
+}
+```
+
 
 ---
 
@@ -145,7 +91,7 @@ $env:PYTHONIOENCODING="utf-8"
 #### 파일:
 - `faucet.abi`
 - `faucet.bin`
-- `.env` (PRIVATE_KEY, RPC_URL)
+- `.env` (파일 내 PRIVATE_KEY과 RPC_URL에 본인의 데이터를 입력)
 
 #### 배포 스크립트: `deploy.js`
 
@@ -153,17 +99,22 @@ $env:PYTHONIOENCODING="utf-8"
 node deploy.js
 ```
 
-### 2. 입금 및 지급 자료 확인
+### 2. 컨트랙트 계좌로 이더 입금
 
-- `deposit()` 함수: ETH 전송 + balances[msg.sender] 증가
-- `get_my_balance()`로 개인 잔액 확인
-- MetaMask 또는 Web3.js를 이용한 입금 테스트
+- 자신의 메타마스크 지갑을 실행
+- 생성된 컨트랙트 계좌로 테스트 이더 전송
 
-### 3. 출금 기능 테스트 (`withdraw.js`)
+### 3. 컨트랙트 계좌 잔액 확인
 
-- `withdraw.js` 파일을 작성하여 출금 트랜잭션을 실행
-- 사전 조건: 해당 계정의 `balances[msg.sender]` 값이 충분해야 함
-- 실행:
+#### 스크립트: `checkBalance.js`
+
+```bash
+node checkBalance.js
+```
+
+### 4. 출금 요청
+
+#### 스크립트: `withdraw.js`
 
 ```bash
 node withdraw.js
@@ -171,17 +122,28 @@ node withdraw.js
 
 - 출금이 완료되면 Etherscan에서 트랜잭션 확인 가능
 
-### 4. 과거 이벤트 조회 (`listen.js`)
+### 5. 과거 이벤트 조회
+
+#### 스크립트: `listen.js`
+
+```bash
+node listen.js
+```
 
 - `node listen.js` 명령어로 실행하여 전체 블록의 Deposit, Withdrawal, LimitChanged 이벤트를 터미널에 출력할 수 있음
-- 이벤트 순서대로 출력되며, 마지막에 "✅ 이벤트 전체 조회 완료!" 메시지로 종료됨
+- 이벤트 순서대로 출력되며, 마지막에 "이벤트 전체 조회 완료!" 메시지로 종료됨
 
 ---
 
-## 📬 그 이상은?
+## 📚 참고
 
-- 특정 주소만 필터링하는 방식 (`filter: { sender: "0x..." }`)
-- 결과를 `.csv` 파일로 저장
-- 블록 범위 지정 및 날짜 기반 분석을 가지고 진행할 수 있습니다.
+- 실습 기반 도서: 『Mastering Ethereum』 by Andreas M. Antonopoulos, Gavin Wood
+- 테스트넷 사용을 위한 Faucet 필요 (Google: "Holesky faucet")
 
-계속적인 확사를 위해 필요한 것이나 건의사항이 있으면 업데이트해 드립니다.
+---
+
+## 🙌 기타
+
+이 저장소는 이더리움 스마트 컨트랙트 학습을 위한 교육/실습 목적입니다.  
+자유롭게 포크하거나 교육 콘텐츠로 활용하셔도 좋습니다.
+
