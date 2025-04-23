@@ -1,4 +1,5 @@
 node_modules/
+vyper-env/
 faucet.abi
 faucet.bytecode
 package-lock.json
