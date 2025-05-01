@@ -25,12 +25,20 @@
 
 ## 💻 실습 예제
 
-- `ReentrancyVulnerable.sol`: 재진입 가능한 버전
-- `ReentrancyFixed.sol`: Checks-Effects-Interactions 방식 적용
-- `Phishable.sol`: tx.origin 피싱 구조 예제
+### ✅ 재진입 공격 (Reentrancy)
+- [ReentrancyVulnerable.sol](./contracts/ReentrancyVulnerable.sol)
+- [ReentrancyFixed.sol](./contracts/ReentrancyFixed.sol)
 
-👉 실제 Solidity 코드 및 실습 예제는 `./contracts` 폴더에 정리할 예정입니다.  
-Remix에 붙여넣으면 바로 실험 가능하게 작성할게요!
+### ✅ tx.origin 피싱
+- [Phishable.sol](./contracts/Phishable.sol)
+
+### ✅ delegatecall 취약점
+- [FibonacciLib.sol](./contracts/FibonacciLib.sol)
+- [FibonacciBalance.sol](./contracts/FibonacciBalance.sol)
+
+### ✅ 외부 컨트랙트 참조 취약점
+- [Rot13Encryption.sol](./contracts/Rot13Encryption.sol)
+- [EncryptionContract.sol](./contracts/EncryptionContract.sol)
 
 ---
 
@@ -53,4 +61,3 @@ Remix에 붙여넣으면 바로 실험 가능하게 작성할게요!
 ---
 
 🔥 이거 하나만 제대로 이해하고 있어도, 왠만한 해킹은 다 막을 수 있습니다.  
-믿고 가자구요, 형님들 💪
