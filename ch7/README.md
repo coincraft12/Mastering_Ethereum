@@ -20,186 +20,167 @@ Holesky 이더리움 테스트넷에 직접 배포하는 과정까지 포함되�
 
 ---
 
-## 테스트 환경 구축 및 실행
+## 테스트 환경
 
-✅ 1. Remix IDE (웹 기반, 추천)
-가장 쉬운 방법!
-설치 없이 브라우저에서 바로 Solidity 코드를 작성하고 컴파일하고 배포까지 가능.
+  ### ✅ **Windows + Node.js + Truffle**
+   - 좀 더 로컬에서 프로젝트 단위로 개발하고 싶다면, Hardhat 또는 Truffle 같은 프레임워크를 설치
 
-🔗 접속: https://remix.ethereum.org
-
-✔️ 장점:
-설치 필요 없음
-학습/실습에 적합
-자동 컴파일, 디버깅, 가스 사용 분석 등 지원
-
-✅ 2. Windows + Node.js + Hardhat or Truffle
-좀 더 로컬에서 프로젝트 단위로 개발하고 싶다면,
-Hardhat 또는 Truffle 같은 프레임워크를 설치하면 돼.
-
-설치 순서 (Truffle 기준):
-① Node.js 설치 → https://nodejs.org
-설치 확인
-```bash
-node -v
-npm -v
-```
-둘 다 버전이 출력되면 OK
-
-② VS Code 설치 (또는 다른 에디터)
-③ Truffle 전역 설치
-```bash
-npm install -g truffle
-```
-※ 시간 오래 걸림
-
-- 설치 완료 확인:
-```bash
-truffle version
-```
-
-④ 프로젝트 생성:
-```bash
-mkdir my-contract && cd my-contract
-truffle init
-```
-
-⑤ 생성되는 디렉토리 구조
-```bash
-my-contract/
-├── contracts/
-├── migrations/
-├── scripts/
-├── truffle-config.js
-```
-
-⑥ Holesky 연결을 위한 의존성 설치
-```bash
-npm install @truffle/hdwallet-provider
-```
-
-⑦ Solidity 코딩: contracts/ 폴더에 .sol 파일 작성
-
-
-⑧ Holesky 네트워크 연결 설정
-- truffle-config.js 파일 속 가장 아래쪽에 Holesky 네트워크 설정 코드를 추가:
-```js
-const HDWalletProvider = require('@truffle/hdwallet-provider');
-
-// 네가 사용하는 지갑의 니모닉 또는 private key
-const PRIVATE_KEY = '0xYOUR_PRIVATE_KEY'; // ⚠️ 비공개로 관리
-
-module.exports = {
-  networks: {
-    holesky: {
-      provider: () => new HDWalletProvider(PRIVATE_KEY, "https://ethereum-holesky.publicnode.com"),
-      network_id: 17000,
-      gas: 3000000,
-      gasPrice: 1000000000
-    }
-  },
-  compilers: {
-    solc: {
-      version: "0.8.20"
-    }
-  }
-};
-```
-
-⑨ 배포 마이그레이션 스크립트 추가
-- migrations/1_deploy.js
-```js
-const MyContract = artifacts.require("my-contract");
-
-module.exports = function (deployer) {
-  deployer.deploy(MyContract);
-};
-```
-
-⑩ 배포
-```bash
-truffle migrate --network holesky
-```
-- 기존 마이그레이션 무시하고 다시 처음 부터 배포
-```bash
-truffle complie --all
-truffle migrate --network holesky --reset
-```
-
-✔️ 장점:
-
-진짜 개발 환경과 유사
-테스트, 디버깅, 배포 자동화 가능
-메인넷 연동도 쉬움
-
-### 📁 프로젝트 디렉토리 구조
-
-```
-ch7/
-├── node_modules/             # npm으로 설치된 외부 라이브러리들 (Git에는 포함하지 않음)
-├── nodejs/                   # solc-js를 사용한 스마트컨트랙트 컴파일 및 배포 실습
-│   └── ...                   # 개별 JS 파일을 통한 수동 컴파일 & 배포 예제 포함
-├── Truffle/                  # Truffle 기반 스마트컨트랙트 실습 모음
-│   ├── Ex_DataType/          # Solidity 자료형 실습 (bool, uint, string, enum, struct, mapping 등)
-│   ├── faucet-logger/        # 이벤트(Event) 발생 및 로그 확인 실습 (Deposit, Withdrawal)
-│   ├── CallExample/          # 컨트랙트 간 호출(call, delegatecall) 실습
-│   ├── gas_estimation/       # 가스 추정 및 계산 실습
-│   └── ...                   # 기타 Truffle 기반 실습 프로젝트
-├── scripts/                  # type: module 자동 토글 등 유틸리티 스크립트
-├── package.json              # 프로젝트 메타 정보 및 의존성 정의
-├── package-lock.json         # 의존성 버전 고정 파일 (자동 생성됨)
-└── README.md                 # 프로젝트 설명 파일
-```
-
+  ### ✅ **설치 (Truffle 기준)**
+  
+  #### 1. Node.js 설치 → https://nodejs.org
+  
+  - 설치 확인 (둘 다 버전이 출력되면 OK)
+  ```bash
+  node -v
+  npm -v
+  ```
+  
+  #### 2. VS Code 설치 (또는 다른 에디터)
+  
+  #### 3. Truffle 전역 설치
+  ```bash
+  npm install -g truffle
+  ```
+  - 설치 완료 확인:
+  ```bash
+  truffle version
+  ```
 ---
 
-## 📝 폴더별 설명
+## 코드 실행
+  ### ✅ **코드 다운로드**
+  ```bash
+  git clone https://github.com/coincraft12/Mastering_Ethereum.git
+  ```
+  
+  #### 1. 디렉토리 구조
+  ```
+  ch7/
+  ├── nodejs/                    # solc-js를 사용한 스마트컨트랙트 수동 컴파일 및 배포 실습
+  │   └── ...                    # 각종 JS 파일 기반 실습 코드
+  ├── Truffle/                   # Truffle 기반 스마트컨트랙트 실습 프로젝트
+  │   ├── build/                 # 컴파일된 ABI 및 바이트코드가 자동 저장되는 폴더
+  │   ├── contracts/             # Solidity 스마트컨트랙트 (.sol 파일들)
+  │   ├── migrations/            # Truffle 배포 스크립트
+  │   ├── scripts/               # 트랜잭션 가스 측정, 이벤트 조회 등의 JS 유틸 스크립트
+  │   ├── tests/                 # 스마트컨트랙트 테스트 코드 (Mocha + Chai 등 활용 가능)
+  │   ├── package.json           # Truffle 프로젝트 설정 및 의존성 정의
+  │   ├── package-lock.json      # 의존성 버전 고정 파일 (자동 생성)
+  │   └── truffle-config.js      # Truffle 네트워크 및 컴파일러 설정 파일
+  ```
+  
+  #### 2. 폴더별 설명
+   - **`nodejs/`**  
+   Truffle 없이 `solc-js`를 사용해 스마트컨트랙트를 컴파일하고 Web3.js로 배포하는 수동 실습 코드들이 포함되어 있습니다.
+   - **`Truffle/`**  
+   Truffle 프레임워크를 활용한 프로젝트 전용 폴더입니다. Solidity 컨트랙트를 컴파일, 마이그레이션, 테스트하며 아래와 같은 하위 폴더를 포함합니다:
+     - `contracts/` – 실제 작성한 Solidity (.sol) 스마트컨트랙트 파일
+     - `migrations/` – 배포 시 실행되는 마이그레이션 스크립트
+     - `scripts/` – 가스 측정, 이벤트 리스너 등 보조 기능을 담당하는 JS 스크립트
+     - `tests/` – 컨트랙트 기능을 검증하기 위한 테스트 코드 (작성 예정 또는 완료)
+     - `build/` – Truffle이 자동 생성하는 ABI와 컴파일 결과 파일
+     - `truffle-config.js` – Holesky 테스트넷 등 네트워크 및 컴파일러 설정
+     - `package.json`, `package-lock.json` – 의존성 및 프로젝트 메타 정보
 
-- **`node_modules/`**: `npm install`로 설치된 외부 라이브러리 저장소. Git에는 포함하지 않음.
-- **`nodejs/`**: Truffle 없이 `solc-js`와 `web3.js`로 직접 스마트컨트랙트를 컴파일하고 배포하는 실습 자료.
-- **`Truffle/`**: Truffle 프레임워크 기반 실습 프로젝트 모음.
-  - `Ex_DataType/`: 다양한 Solidity 데이터 타입 실습.
-  - `faucet-logger/`: 이벤트 발생 및 과거 이벤트 로그 조회 실습.
-  - `CallExample/`: 다른 컨트랙트를 호출하거나 위임 호출하는 실습.
-  - `gas_estimation/`: 트랜잭션 가스 사용량을 예측하고 계산하는 실습.
-- **`scripts/`**: `package.json`의 `"type": "module"`을 자동으로 토글하는 유틸리티 스크립트 등이 포함.
-- **`package.json` / `package-lock.json`**: 프로젝트 정보 및 의존성 관리 파일.
-- **`README.md`**: 본 프로젝트 설명서.
+ ### ✅ **의존성 (Dependencies) 패키지 설치**
 
----
+  #### 1. Holesky 연결을 위한 의존성 추가
+  ```bash
+  npm install @truffle/hdwallet-provider
+  ```
+  
+  #### 2. 패키지 설치 (node_modules)
+  ```bash
+  npm install
+  ```
+  - package.json 파일이 있는 디렉토리(\ch7\Truffle\)에서 실행해야 정상 작동됨
+  - 설치 완료 후 Truffle 디렉토리에 node_modules/ 디렉토리 생성됨
 
+ ### ✅ **컴파일 및 배포**
+   
+   #### 1. 컴파일
+   ```bash
+   truffle compile
+   ```
 
+   #### 2. 블록체인 배포
+   - 실행 전 truffle-config.js 코드 내 MetaMask 개인키 입력 (주의)
+   ```js
+   const PRIVATE_KEY = ["YOUR PRIVATE_KEY"];
+   ```
+   ```bash
+   truffle migrate --network holesky
+   ```
 
-## 🔁 자동 모듈 설정 토글 스크립트 예시
+   #### ※ 기존 마이그레이션 무시하고 다치 처음 부터 배포
+   ```bash
+   truffle complie --all
+   truffle migrate --network holesky --reset
+   ```
 
-```json
-// package.json
-"scripts": {
-  "toggle:module": "node scripts/toggle-module-type.cjs",
-  "truffle:migrate": "npm run toggle:module && truffle migrate --network holesky --reset && npm run toggle:module"
-}
-```
+ ### ✅ **실행**
 
-스크립트 예시 (`scripts/toggle-module-type.cjs`):
+   #### 1. 가스 예상 가격 출력
+   - 실행 전 truffle-config.js 코드 내 MetaMask 개인키 입력 (주의)
+   ```js
+   const PRIVATE_KEY = ["YOUR PRIVATE_KEY"];
+   ```
+   ```bash
+   cd scripts/
+   truffle console --network holesky
+   ```
+   - truffle 콘솔 창에 진입 시:
+   ```js
+   exec gas_estimate.js
+   ```
 
-```js
-const fs = require('fs');
-const path = require('path');
+   #### 2. 트랜잭션 이벤트 출력
+   ```bash
+   cd scripts
+   node listen.js
+   ```
 
-const packageJsonPath = path.join(__dirname, '..', 'package.json');
-const pkg = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'));
-
-if (pkg.type === 'module') {
-  delete pkg.type;
-  console.log('🟡 "type": "module" → 제거 완료');
-} else {
-  pkg.type = 'module';
-  console.log('🟢 "type": "module" → 추가 완료');
-}
-
-fs.writeFileSync(packageJsonPath, JSON.stringify(pkg, null, 2));
-```
-
+   #### 3. 다른 컨트랙트 호출
+   ```bash
+   cd scripts/
+   truffle console --network holesky
+   ```
+   - truffle 콘솔 창에 진입 시:
+   ```js
+   const Caller = await artifacts.require("Caller");
+   const CalledContract = await artifacts.require("CalledContract");
+   const caller = await Caller.deployed();
+   const called = await CalledContract.deployed();
+   const receipt = await caller.makeCalls(called.address);
+   ```
+   - 이벤트 로그 실제 값 출력
+   ```js
+   receipt.logs.forEach(log => {   
+    console.log("Event from:", log.address);   
+    console.log("  sender:", log.args.sender);   
+    console.log("  origin:", log.args.origin);   
+    console.log("  this:", log.args.current);   
+    });
+   ```
+ 
+ ### 🧰 **solc-js + nodejs 수동 배포 예제**
+   Truffle 프레임워크 없이 solc-js와 web3.js를 활용하여 스마트 컨트랙트를 수동으로 컴파일하고 Holesky 테스트넷에 배포하는 과정입니다.
+   ```bash
+   # 1. 프로젝트 폴더로 이동
+   cd ch7/nodejs
+   
+   # 2. solcjs 및 web3 설치
+   npm install solc web3
+   
+   # 3. solcjs로 컴파일
+   solcjs --bin --abi Example_DataType.sol
+   
+   # 4. 배포 스크립트 실행 (Deploy.js)
+   node Deploy.js
+   ```
+   - PRIVATE_KEY와 RPC_URL은 사용자의 환경에 맞게 설정해야 함
+   - output/MyContract_sol_MyContract.abi와 .bin 파일을 배포 스크립트에서 읽어옴
+   - 배포가 성공하면 콘솔에 컨트랙트 주소가 출력됨
 ---
 
 ## 📚 참고

@@ -8,27 +8,33 @@
 
 ## 📁 폴더 구성
 
-|  폴더 | 내용 요약                               | 사용 언어/플랫폼      |
-|-------|----------------------------------------|----------------------|
-| `ch2` | 스마트 계약 맛보기 (Solidity 기본 구조)  | Solidity / Remix     |
-| `ch5` | BIP-39 니모닉 생성 및 지갑 구성 실습     | Python / Streamlit   |
+|  폴더   | 내용 요약                                                    | 사용 언어/플랫폼                |
+|---------|------------------------------------------------------------|-------------------------------|
+| `ch2`   | 스마트 계약 맛보기 (Solidity 기본 구조)                        | Solidity / Remix              |
+| `ch4`   | 공개키 기반 주소 생성, keccak256 해시 흐름 실습                 | Python / eth-utils, eth-keys  |
+| `ch5`   | BIP-39 니모닉 생성 및 지갑 구성 실습                           | Python / Streamlit            |
+| `ch6`   | 트랜잭션 구조 분석, 디지털 서명 및 EIP-155 실습                 | JavaScript / Node.js          |
+| `ch7`   | 스마트 컨트랙트 작성, 컴파일, Holesky 배포 (Truffle & solc-js) | Solidity / Truffle / Node.js   |
 
 ---
 
 ## 🛠️ 전체 프로젝트 실행을 위한 기본 요구사항
 
 - Python 3.9+
+- Node.js 20+
 - Git
-- (선택) Node.js / MetaMask (향후 챕터에서 사용 예정)
+- MetaMask (ch6~ch7 실습에서 필요)
+- Infura 또는 Public RPC (예: Holesky)
 
 ---
 
 ## 🗂️ 향후 계획 (To-do)
 
-- [ ] ch3: Ethereum 계정과 트랜잭션 실습
-- [ ] ch4: 디지털 서명과 ECDSA 흐름 시각화
-- [x] ch5: 니모닉 생성 및 이더리움 지갑 파생 실습
-- [ ] ch6 이후: 실제 스마트 계약 배포 및 호출 실습
+- [ ] ch3: Ethereum 계정과 트랜잭션 실습  
+- [ ] ch4: 디지털 서명과 ECDSA 흐름 시각화  
+- [x] ch5: 니모닉 생성 및 이더리움 지갑 파생 실습  
+- [x] ch6: 트랜잭션 구조, 서명 및 EIP-155 적용 실습 완료  
+- [x] ch7: 스마트 컨트랙트 작성 및 Holesky 배포 실습 완료
 
 ---
 
