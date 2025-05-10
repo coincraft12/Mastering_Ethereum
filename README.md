@@ -14,7 +14,10 @@
 | `ch4`   | 공개키 기반 주소 생성, keccak256 해시 흐름 실습                 | Python / eth-utils, eth-keys  |
 | `ch5`   | BIP-39 니모닉 생성 및 지갑 구성 실습                           | Python / Streamlit            |
 | `ch6`   | 트랜잭션 구조 분석, 디지털 서명 및 EIP-155 실습                 | JavaScript / Node.js          |
-| `ch7`   | 스마트 컨트랙트 작성, 컴파일, Holesky 배포 (Truffle & solc-js) | Solidity / Truffle / Node.js   |
+| `ch7`   | 스마트 컨트랙트 작성, 컴파일, Holesky 배포 (Truffle & solc-js) | Solidity / Truffle / Node.js  |
+| `ch8`   | Vyper 기반 스마트 컨트랙트 작성 및 CLI 배포 흐름                | Vyper / CLI                   |
+| `ch9`   | 스마트 컨트랙트 보안 취약점 및 대응 패턴 요약                    | Solidity / 참고 코드 중심 문서 |
+| `ch10`  | ERC20 토큰 제작 및 배포, transfer/approve 실습                 | Solidity / Truffle / MetaMask |
 
 ---
 
@@ -23,8 +26,10 @@
 - Python 3.9+
 - Node.js 20+
 - Git
-- MetaMask (ch6~ch7 실습에서 필요)
+- MetaMask (ch6~ch10 실습에서 필요)
 - Infura 또는 Public RPC (예: Holesky)
+- Ganache (로컬 테스트 시 필요)
+- Vyper (ch8 실습에서 필요)
 
 ---
 
@@ -32,9 +37,12 @@
 
 - [ ] ch3: Ethereum 계정과 트랜잭션 실습  
 - [ ] ch4: 디지털 서명과 ECDSA 흐름 시각화  
-- [x] ch5: 니모닉 생성 및 이더리움 지갑 파생 실습  
+- [x] ch5: 니모닉 생성 및 이더리움 지갑 파생 실습 완료  
 - [x] ch6: 트랜잭션 구조, 서명 및 EIP-155 적용 실습 완료  
-- [x] ch7: 스마트 컨트랙트 작성 및 Holesky 배포 실습 완료
+- [x] ch7: 스마트 컨트랙트 작성 및 Holesky 배포 실습 완료  
+- [x] ch8: Vyper 스마트 컨트랙트 및 CLI 기반 배포 실습 완료  
+- [x] ch9: 보안 패턴 및 취약점 정리 완료  
+- [x] ch10: ERC20 토큰 발행, transferFrom 및 approve 구조 실습 완료
 
 ---
 
