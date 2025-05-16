@@ -18,6 +18,7 @@
 | `ch8`   | Vyper 기반 스마트 컨트랙트 작성 및 CLI 배포 흐름                | Vyper / CLI                   |
 | `ch9`   | 스마트 컨트랙트 보안 취약점 및 대응 패턴 요약                    | Solidity / 참고 코드 중심 문서 |
 | `ch10`  | ERC20 토큰 제작 및 배포, transfer/approve 실습                 | Solidity / Truffle / MetaMask |
+| `ch11`  | Chainlink 오라클 실습: ETH/USD 가격 피드 조회                   | Solidity / Truffle / Chainlink|
 
 ---
 
@@ -43,6 +44,7 @@
 - [x] ch8: Vyper 스마트 컨트랙트 및 CLI 기반 배포 실습 완료  
 - [x] ch9: 보안 패턴 및 취약점 정리 완료  
 - [x] ch10: ERC20 토큰 발행, transferFrom 및 approve 구조 실습 완료
+- [x] ch11: Chainlink 오라클 연동, ETH/USD 가격 피드 조회 실습 완료
 
 ---
 
