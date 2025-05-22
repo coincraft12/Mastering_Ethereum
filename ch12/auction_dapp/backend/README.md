@@ -1,4 +1,4 @@
-# 🏗 Ethereum Auction DApp on Holesky (Truffle + Vue)
+# 🏗 Ethereum Auction DApp on Holesky (Contract)
 
 이 프로젝트는 `ERC721` 기반 NFT 경매 DApp을 Holesky 테스트넷에 Truffle을 사용해 배포하고, 스마트 컨트랙트를 테스트하는 실습입니다.
 
