@@ -81,6 +81,72 @@
 
 ---
 
+## 🧪 실습: EVM 바이트코드 생성 및 분석
+
+### 🎯 실습 목표
+간단한 Solidity 컨트랙트를 작성하고 `solc` 명령어를 이용해 다음 파일들을 생성하고 분석합니다:
+- `.opcode` : EVM 명령어(OpCodes)
+- `.asm` : 어셈블리 수준 설명
+- `.bin` : 바이트코드
+
+이를 통해 EVM opcode와 메모리 구조를 직접 확인해 봅니다.
+
+
+### 🔧 설치 방법 (Windows 기준)
+
+1. Solidity 컴파일러 다운로드:  
+👉 [Solidity Releases on GitHub](https://github.com/ethereum/solidity/releases)  
+→ `solc-windows.exe` 파일을 다운로드 받아 예: `C:\solidity\solc.exe` 경로에 저장합니다.
+
+2. CMD 또는 PowerShell에서 컴파일러 버전 확인:
+```powershell
+cd C:\solidity
+.\solc.exe --version
+```
+
+
+### 📝 예제 Solidity 파일 (Example.sol)
+
+```solidity
+pragma solidity ^0.4.19;
+
+contract example {
+    address contractOwner;
+
+    function example() public {
+        contractOwner = msg.sender;
+    }
+}
+```
+
+
+### ⚙️ 컴파일 명령어
+
+```powershell
+cd C:\solidity
+.\solc.exe -o BytecodeDir --opcodes --asm --bin Example.sol
+```
+
+위 명령어 실행 시 `BytecodeDir` 폴더에 다음 파일들이 생성됩니다:
+- `example.opcodes`
+- `example.asm`
+- `example.bin`
+
+이를 열어보고 디스패처 유무, opcode 구조, 스택 및 메모리 조작 방식을 관찰해보세요.
+
+### 🔄 추가 실습 (선택 사항)
+
+#### 🧰 --bin-runtime 옵션 사용
+스마트 컨트랙트의 **배포 코드가 아닌**, 실제 블록체인에 저장되고 트랜잭션 호출 시 실행되는 **런타임 바이트코드**만 추출할 수 있습니다.
+
+```powershell
+solc -o BytecodeDir --bin-runtime Example.sol
+```
+
+출력된 `.bin-runtime` 파일을 통해 디스패처가 실제로 어디서부터 시작되는지, 런타임 코드 구조가 어떻게 구성되는지를 명확히 확인할 수 있습니다.
+
+---
+
 ## 📌 참고
 
 - 『Mastering Ethereum』 Chapter 13
