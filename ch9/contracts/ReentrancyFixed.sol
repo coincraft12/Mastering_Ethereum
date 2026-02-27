@@ -12,7 +12,7 @@ contract ReentrancyFixed {
         uint256 amount = balances[msg.sender];
         require(amount > 0, "No funds to withdraw");
 
-        // ✅ 상태 먼저 변경
+        // 상태 먼저 변경
         balances[msg.sender] = 0;
 
         (bool success, ) = msg.sender.call{value: amount}("");

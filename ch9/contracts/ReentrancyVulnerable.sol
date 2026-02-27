@@ -12,7 +12,7 @@ contract ReentrancyVulnerable {
         uint256 amount = balances[msg.sender];
         require(amount > 0, "No funds to withdraw");
 
-        // 💥 외부 호출 먼저!
+        // 외부 호출 먼저!
         (bool success, ) = msg.sender.call{value: amount}("");
         require(success, "Failed to send Ether");
 

@@ -1,0 +1,190 @@
+    /* "Example.sol":43:166  contract Example {... */
+  mstore(0x40, 0x80)
+    /* "Example.sol":104:163  constructor() {... */
+  callvalue
+  dup1
+  iszero
+  tag_1
+  jumpi
+  revert(0x00, 0x00)
+tag_1:
+  pop
+    /* "Example.sol":145:155  msg.sender */
+  caller
+    /* "Example.sol":129:142  contractOwner */
+  0x00
+  0x00
+    /* "Example.sol":129:155  contractOwner = msg.sender */
+  0x0100
+  exp
+  dup2
+  sload
+  dup2
+  0xffffffffffffffffffffffffffffffffffffffff
+  mul
+  not
+  and
+  swap1
+  dup4
+  0xffffffffffffffffffffffffffffffffffffffff
+  and
+  mul
+  or
+  swap1
+  sstore
+  pop
+    /* "Example.sol":43:166  contract Example {... */
+  dataSize(sub_0)
+  dup1
+  dataOffset(sub_0)
+  0x00
+  codecopy
+  0x00
+  return
+stop
+
+sub_0: assembly {
+        /* "Example.sol":43:166  contract Example {... */
+      mstore(0x40, 0x80)
+      callvalue
+      dup1
+      iszero
+      tag_1
+      jumpi
+      revert(0x00, 0x00)
+    tag_1:
+      pop
+      jumpi(tag_2, lt(calldatasize, 0x04))
+      shr(0xe0, calldataload(0x00))
+      dup1
+      0xce606ee0
+      eq
+      tag_3
+      jumpi
+    tag_2:
+      revert(0x00, 0x00)
+        /* "Example.sol":67:95  address public contractOwner */
+    tag_3:
+      tag_4
+      tag_5
+      jump	// in
+    tag_4:
+      mload(0x40)
+      tag_6
+      swap2
+      swap1
+      tag_7
+      jump	// in
+    tag_6:
+      mload(0x40)
+      dup1
+      swap2
+      sub
+      swap1
+      return
+    tag_5:
+      0x00
+      0x00
+      swap1
+      sload
+      swap1
+      0x0100
+      exp
+      swap1
+      div
+      0xffffffffffffffffffffffffffffffffffffffff
+      and
+      dup2
+      jump	// out
+        /* "#utility.yul":7:133   */
+    tag_8:
+        /* "#utility.yul":44:51   */
+      0x00
+        /* "#utility.yul":84:126   */
+      0xffffffffffffffffffffffffffffffffffffffff
+        /* "#utility.yul":77:82   */
+      dup3
+        /* "#utility.yul":73:127   */
+      and
+        /* "#utility.yul":62:127   */
+      swap1
+      pop
+        /* "#utility.yul":7:133   */
+      swap2
+      swap1
+      pop
+      jump	// out
+        /* "#utility.yul":139:235   */
+    tag_9:
+        /* "#utility.yul":176:183   */
+      0x00
+        /* "#utility.yul":205:229   */
+      tag_14
+        /* "#utility.yul":223:228   */
+      dup3
+        /* "#utility.yul":205:229   */
+      tag_8
+      jump	// in
+    tag_14:
+        /* "#utility.yul":194:229   */
+      swap1
+      pop
+        /* "#utility.yul":139:235   */
+      swap2
+      swap1
+      pop
+      jump	// out
+        /* "#utility.yul":241:359   */
+    tag_10:
+        /* "#utility.yul":328:352   */
+      tag_16
+        /* "#utility.yul":346:351   */
+      dup2
+        /* "#utility.yul":328:352   */
+      tag_9
+      jump	// in
+    tag_16:
+        /* "#utility.yul":323:326   */
+      dup3
+        /* "#utility.yul":316:353   */
+      mstore
+        /* "#utility.yul":241:359   */
+      pop
+      pop
+      jump	// out
+        /* "#utility.yul":365:587   */
+    tag_7:
+        /* "#utility.yul":458:462   */
+      0x00
+        /* "#utility.yul":496:498   */
+      0x20
+        /* "#utility.yul":485:494   */
+      dup3
+        /* "#utility.yul":481:499   */
+      add
+        /* "#utility.yul":473:499   */
+      swap1
+      pop
+        /* "#utility.yul":509:580   */
+      tag_18
+        /* "#utility.yul":577:578   */
+      0x00
+        /* "#utility.yul":566:575   */
+      dup4
+        /* "#utility.yul":562:579   */
+      add
+        /* "#utility.yul":553:559   */
+      dup5
+        /* "#utility.yul":509:580   */
+      tag_10
+      jump	// in
+    tag_18:
+        /* "#utility.yul":365:587   */
+      swap3
+      swap2
+      pop
+      pop
+      jump	// out
+
+    auxdata: 0xa264697066735822122029d40f52143d6b854cad14ec6dd4977eeb565138b8ea31b05d4da401143bcbea64736f6c634300081e0033
+}
